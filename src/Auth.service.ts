@@ -1,7 +1,7 @@
-import AuthDAO from "Auth.dao";
-import User from "Auth.model";
-import CreateUserRequestDTO from "DTOs/CreateUserRequest.dto";
-import Encrypting from "utils/Encrypting";
+import AuthDAO from "./Auth.dao";
+import User from "./Auth.model";
+import CreateUserRequestDTO from "./DTOs/CreateUserRequest.dto";
+import Encrypting from "./utils/Encrypting";
 
 export default class AuthService {
 

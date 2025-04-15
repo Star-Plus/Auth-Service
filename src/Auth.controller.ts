@@ -1,7 +1,7 @@
-import AuthService from "Auth.service";
-import AuthValidator from "Auth.validator";
-import CreateUserRequestDTO from "DTOs/CreateUserRequest.dto";
-import { Request, RequestHandler, Response } from "express";
+import AuthService from "./Auth.service";
+import AuthValidator from "./Auth.validator";
+import CreateUserRequestDTO from "./DTOs/CreateUserRequest.dto";
+import { RequestHandler } from "express";
 
 export default class AuthController{
 
