@@ -3,9 +3,13 @@ dotenv.config();
 
 import express from "express";
 import AuthRouter from "./Auth.routes"
-import { connectToDB } from 'config/DB';
+import { connectToDB, initDB } from './config/DB';
+import bodyParser from 'body-parser';
 
 const app = express();
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
 
 app.use('/auth', AuthRouter)
 
@@ -14,6 +18,7 @@ app.listen(process.env.PORT, ()=>{
 
     connectToDB().then(()=>{
         console.log("DB Connected")
+        initDB();
     }).catch((err)=>{
         console.error(err.message)
     })

@@ -1,3 +1,4 @@
+import UserResponse from "./DTOs/UserResponse.dto";
 import AuthService from "./Auth.service";
 import AuthValidator from "./Auth.validator";
 import CreateUserRequestDTO from "./DTOs/CreateUserRequest.dto";
@@ -15,7 +16,7 @@ export default class AuthController{
 
         const createdUser = await AuthService.RegisterUser(new CreateUserRequestDTO(req.body));
 
-        res.status(201).json(createdUser);
+        res.status(201).json(new UserResponse(createdUser));
     }
 
 }

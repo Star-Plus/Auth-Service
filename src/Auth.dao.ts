@@ -1,4 +1,4 @@
-import dbclient from "config/DB";
+import dbclient from "./config/DB";
 import User from "./Auth.model";
 
 export default class AuthDAO {
@@ -6,9 +6,9 @@ export default class AuthDAO {
     static async AddUser(user: User){
         try {
             const createdUser = await dbclient.
-            query(`INSERT INTO USER (name, email, password) VALUES(${user.name}, ${user.email}, ${user.password})`);
+            query(`insert into "User" (name, email, password) values('${user.name}', '${user.email}', '${user.password}') returning *`);
 
-            return createdUser;
+            return createdUser.rows[0];
         } catch(err){
             throw new Error(err.message);
         }
