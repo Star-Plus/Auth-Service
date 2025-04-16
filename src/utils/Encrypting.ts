@@ -7,4 +7,8 @@ export default class Encrypting {
     static encryptPassword(password: string) : string{
         return cryptoJs.AES.encrypt(password, Encrypting.passwordHash).toString();
     }
+
+    static decryptPassword(encryptedPassword: string) : string {
+        return cryptoJs.AES.decrypt(encryptedPassword, Encrypting.passwordHash).toString();
+    }
 }

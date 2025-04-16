@@ -1,0 +1,34 @@
+<div class="mermaid">
+
+sequenceDiagram
+
+    actor UserClient
+    participant AuthRoutes
+    participant AuthController
+    participant AuthValidator
+    participant CreateUserRequestDTO
+    participant UserResponseDTO
+    participant AuthService
+    participant Encrypting
+    participant AuthDAO
+    participant User
+
+    UserClient ->> AuthRoutes : /auth/signup
+    AuthRoutes ->> AuthController : RegisterUser()
+    AuthController ->> AuthValidator : ValidateRequest()
+    AuthValidator -->> AuthController : Request valid
+    AuthController ->> CreateUserRequestDTO : Wrap user in dto
+    CreateUserRequestDTO -->> AuthController : DTO wrapped
+    AuthController ->> AuthService : RegisterUser(registerUserDto)
+    AuthService ->> Encrypting : EncryptPassword(registerUserDto.password)
+    Encrypting -->> AuthService : encrypted password
+    AuthService ->> User : Create User object
+    User -->> AuthService : User created
+    AuthService ->> AuthDAO : AddUser(user)
+    AuthDAO -->> AuthService : User added to database
+    AuthService -->> AuthController : User registered successfuly
+    AuthController ->> UserResponseDTO : Wrap user in dto
+    UserResponseDTO -->> AuthController : DTO wrapped
+    AuthController ->> UserClient : User response
+
+</div>

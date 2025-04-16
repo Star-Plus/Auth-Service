@@ -1,0 +1,67 @@
+<div class="mermaid">
+
+classDiagram
+
+    class User {
+        + id : UUID
+        + name : String
+        + email : String
+        + password : String
+    }
+
+    class AuthDAO {
+        + AddUser(user: User)
+        + GetUserByID(id: string) User
+        + GetUserByEmail(email: string) User
+    }
+
+    class AuthService {
+        + RegisterUser(user: CreateUserRequestDTO)
+        + GetUserByID(id: string) User
+        + AuthenticateUser(credentials: LoginUserRequestDTO)
+    }
+
+    class AuthController {
+        + RegisterUser(req, res)
+        + GetUserByID(req, res)
+        + LoginUser(req, res)
+    }
+
+    class AuthValidator {
+        + ValidateCreateUser(request: any)
+    }
+
+    class CreateUserRequestDTO {
+        name : String
+        email : String
+        password : String
+    }
+
+    class LoginUserRequestDTO {
+        email : String
+        password : String
+    }
+
+    class UserResponseDTO {
+        name : String
+        email : String
+    }
+
+    class Encrypting {
+        + passwordHash : String
+
+        + encryptPassword(password: String) String
+        + decryptPassword(decryptedPassword: String) String
+    }
+
+    AuthDAO o-- User
+    AuthController o-- CreateUserRequestDTO
+    AuthController o-- UserResponseDTO
+    AuthController o-- LoginUserRequestDTO
+    AuthService o-- Encrypting
+    AuthService o-- AuthDAO
+    AuthController o-- AuthService
+    AuthController o-- AuthValidator
+    
+
+</div>

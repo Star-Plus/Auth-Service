@@ -1,0 +1,27 @@
+<div class="mermaid">
+
+sequenceDiagram
+    actor UserClient
+    participant AuthRoutes
+    participant AuthController
+    participant LoginUserRequestDTO
+    participant AuthService
+    participant JWT
+    participant AuthDAO
+    participant User
+
+    UserClient ->> AuthRoutes : /auth/login
+    AuthRoutes ->> AuthController : LoginUser
+    AuthController ->> LoginUserRequestDTO : Wrap request in DTO
+    AuthController ->> AuthService : AuthenticateUser(loginCredentialsDto)
+    AuthService ->> AuthDAO : GetUserByEmail(loginCredentials.email)
+    AuthDAO ->> User : Create User object
+    AuthDAO -->> AuthService : Return user
+    AuthService ->> Encrypting : DecryptPassword(user.password)
+    Encrypting -->> AuthService : passwordDecrypted
+    AuthService ->> JWT : Assign user id
+    JWT -->> AuthService : return access token
+    AuthService -->> AuthController : return access token
+    AuthController -->> UserClient : access token
+
+</div>

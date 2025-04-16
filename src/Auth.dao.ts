@@ -1,5 +1,6 @@
 import dbclient from "./config/DB";
 import User from "./Auth.model";
+import { InternalServerError } from "./utils/SPError";
 
 export default class AuthDAO {
 
@@ -10,31 +11,31 @@ export default class AuthDAO {
 
             return createdUser.rows[0];
         } catch(err){
-            throw new Error(err.message);
+            throw new InternalServerError(err.message);
         }
     }
 
     static async GetUserByID(id: string) : Promise<User>{
         try {
             const user = await dbclient.
-            query(`SELECT * FROM User WHERE id = ${id}`)
+            query(`SELECT * FROM "User" WHERE id = '${id}'`)
 
             return user.rows[0];
         }
         catch(err){
-            throw new Error(err.message);
+            throw new InternalServerError(err.message);
         }
     }
 
     static async GetUserByEmail(email: string) : Promise<User>{
         try {
             const user = await dbclient.
-            query(`SELECT * FROM User WHERE email = ${email}`)
+            query(`SELECT * FROM "User" WHERE email = '${email}'`)
 
             return user.rows[0];
         }
         catch(err){
-            throw new Error(err.message);
+            throw new InternalServerError(err.message);
         }
     }
 
