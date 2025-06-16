@@ -4,6 +4,6 @@ export default class LoginCredentialsRequestDTO {
 
     constructor(data: any){
         this.email = data.email;
-        this.password = data.email;
+        this.password = data.password;
     }
 }

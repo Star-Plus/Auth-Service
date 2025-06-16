@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from "express";
-import AuthRouter from "./Auth.routes"
-import { connectToDB, initDB } from './config/DB';
+import AuthRouter from "./Auth/Auth.routes"
+import { connectToDB, initDB } from './Auth/config/DB';
 import bodyParser from 'body-parser';
 import cors from "cors"
 

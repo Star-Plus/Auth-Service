@@ -3,7 +3,7 @@ import AuthService from "./Auth.service";
 import AuthValidator from "./Auth.validator";
 import CreateUserRequestDTO from "./DTOs/CreateUserRequest.dto";
 import { RequestHandler } from "express";
-import LoginCredentialsRequestDTO from "DTOs/LoginCredentialsRequest.dto";
+import LoginCredentialsRequestDTO from "./DTOs/LoginCredentialsRequest.dto";
 
 export default class AuthController{
 
@@ -22,8 +22,9 @@ export default class AuthController{
 
     static loginUser : RequestHandler = async (req, res)=>{
         try {
+
             const accessToken = await AuthService.AuthenticateUser(new LoginCredentialsRequestDTO(req.body));
-            res.status(200).json({accessToken})
+            res.status(200).json({token: accessToken});
         }
         catch(err){
             res.status(err.status).json({error: err.message});

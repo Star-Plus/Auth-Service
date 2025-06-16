@@ -30,6 +30,8 @@ export default class AuthService {
 
             const originalPassword = Encrypting.decryptPassword(user.password);
 
+            console.log(originalPassword, data.password)
+
             if (originalPassword != data.password){
                 throw new UnauthorizedError("Wrong credentials");
             }
